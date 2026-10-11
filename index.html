@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DFLCMCI — Online Appointment System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="logo">DFLCMCI</h1>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" data-target="homePage">Home</a></li>
+                <li id="authLinks">
+                    <a href="#register" data-target="registerPage">Student Register</a>
+                    <a href="#admin-register" data-target="adminRegisterPage" id="adminRegisterLink">Admin Register</a>
+                    <a href="#login" data-target="loginPage">Login</a>
+                </li>
+                <li id="userLinks" style="display:none;">
+                    <span id="userName" ></span>
+                    <a href="#" id="logoutBtn">Logout</a>
+                </li>
+            </ul>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Home Page -->
+        <section id="homePage" class="page active">
+            <div class="hero">
+                <h2>Welcome to DFLCMCI Online Appointment System</h2>
+                <p>Skip the long queues. Register once, book ahead, and visit only when confirmed.</p>
+                <div class="hero-buttons">
+                    <button class="btn primary" data-target="registerPage">Student Register</button>
+                    <button class="btn secondary" data-target="adminRegisterPage" id="heroAdminBtn">Admin Register</button>
+                    <button class="btn secondary" data-target="loginPage">Login</button>
+                </div>
+            </div>
+
+            <div class="features">
+                <h3>System Features</h3>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>🔐 Separate Registration</h4>
+                        <p>Admin and Student have their own registration forms — clear and secure.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>👤 Single Admin Account</h4>
+                        <p>Only ONE Main Administrator can be created — secured and controlled.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🔑 Password Recovery</h4>
+                        <p>Forgot password? Works for BOTH Admin and Student — easy reset anytime.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>📅 Book Appointments</h4>
+                        <p>Select purpose, date, and time — evaluation, enrollment, documents & more.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🔍 Quick Search</h4>
+                        <p>Find requests instantly by Student ID or Name — no more scrolling!</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>✅ Workflow Status</h4>
+                        <p>Pending → Approved → Completed / Rejected — full tracking available.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STUDENT Register Page -->
+        <section id="registerPage" class="page">
+            <div class="auth-box">
+                <h2>📝 Student Registration</h2>
+                <p class="auth-subtitle">Create your student account to book appointments</p>
+                
+                <form id="studentRegisterForm">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="regName" placeholder="Last Name, First Name Middle Initial" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Student ID Number</label>
+                        <input type="text" id="regId" placeholder="e.g. 2024-00123" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="regEmail" placeholder="yourname@dflcmci.edu.ph" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Contact Number</label>
+                        <input type="tel" id="regContact" placeholder="09XX-XXX-XXXX" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="regPass" placeholder="Min. 6 characters" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm Password</label>
+                        <input type="password" id="regConfirmPass" placeholder="Re-enter password" required>
+                    </div>
+                    <button type="submit" class="btn primary full">Register as Student</button>
+                </form>
+                <p class="auth-note">Need Admin account? <a href="#" data-target="adminRegisterPage" class="link">Go to Admin Registration</a></p>
+                <p class="auth-note">Already have an account? <a href="#" data-target="loginPage" class="link">Login here</a></p>
+            </div>
+        </section>
+
+        <!-- ADMIN Register Page -->
+        <section id="adminRegisterPage" class="page">
+            <div class="auth-box">
+                <h2 id="adminRegTitle">🔐 Administrator Registration</h2>
+                <p class="auth-subtitle" id="adminRegSubtitle">Create Main Administrator Account — ONE TIME ONLY</p>
+                
+                <div id="adminSetupNotice" class="setup-notice">
+                    ⚠️ <strong>Important:</strong> Only <strong>ONE Main Administrator</strong> is allowed. Once created, this form will be permanently disabled.
+                </div>
+                
+                <form id="adminRegisterForm">
+                    <div class="form-group">
+                        <label>Admin Full Name</label>
+                        <input type="text" id="adminRegName" placeholder="Full Name of System Administrator" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Admin ID</label>
+                        <input type="text" id="adminRegId" placeholder="e.g. ADMIN-001" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="adminRegEmail" placeholder="admin@dflcmci.edu.ph" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Official Position / Designation</label>
+                        <input type="text" id="adminRegPosition" placeholder="e.g. School Registrar / Admin Officer" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Contact Number</label>
+                        <input type="tel" id="adminRegContact" placeholder="09XX-XXX-XXXX" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="adminRegPass" placeholder="Min. 8 characters" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm Password</label>
+                        <input type="password" id="adminRegConfirmPass" placeholder="Re-enter password" required>
+                    </div>
+                    <button type="submit" class="btn primary full" id="adminRegBtn">Create Administrator Account</button>
+                </form>
+                <p class="auth-note">Student? <a href="#" data-target="registerPage" class="link">Go to Student Registration</a></p>
+                <p class="auth-note">Already have Admin account? <a href="#" data-target="loginPage" class="link">Login here</a></p>
+            </div>
+        </section>
+
+        <!-- Login Page -->
+        <section id="loginPage" class="page">
+            <div class="auth-box">
+                <h2>Login</h2>
+                <p class="auth-subtitle">Access your account — select your role below</p>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label>ID / Email Address</label>
+                        <input type="text" id="loginUser" placeholder="Enter your ID or Email" required autocomplete="username">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="loginPass" placeholder="Enter your password" required autocomplete="current-password">
+                    </div>
+                    <div class="form-group">
+                        <label>Account Role <span style="color:red;">*</span></label>
+                        <select id="loginRole" required>
+                            <option value="">-- Select Your Role --</option>
+                            <option value="student">🎓 Student</option>
+                            <option value="admin">🔐 Administrator</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn primary full" id="loginSubmitBtn">Sign In</button>
+                </form>
+                <p class="auth-note">
+                    <a href="#" data-target="resetPage" class="link">Forgot Password?</a> — works for <strong>Admin & Student</strong>
+                </p>
+                <p class="auth-note">No account yet? 
+                    <a href="#" data-target="registerPage" class="link">Student Register</a> | 
+                    <a href="#" data-target="adminRegisterPage" class="link" id="loginAdminLink">Admin Register</a>
+                </p>
+            </div>
+        </section>
+
+        <!-- Reset Password Page -->
+        <section id="resetPage" class="page">
+            <div class="auth-box">
+                <h2>🔑 Reset Your Password</h2>
+                <p class="auth-subtitle">Works for BOTH Administrator and Student accounts</p>
+                
+                <form id="resetForm">
+                    <div class="form-group">
+                        <label>Account Type</label>
+                        <select id="resetRole" required>
+                            <option value="">-- Select Account Type --</option>
+                            <option value="admin">🔐 Administrator</option>
+                            <option value="student">🎓 Student</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Registered Email or ID</label>
+                        <input type="text" id="resetIdentifier" placeholder="Enter your Email or ID" required>
+                    </div>
+                    <div class="form-group">
+                        <label>New Password</label>
+                        <input type="password" id="newPass" placeholder="Admin: min. 8 chars | Student: min. 6 chars" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm New Password</label>
+                        <input type="password" id="confirmNewPass" placeholder="Re-enter new password" required>
+                    </div>
+                    <button type="submit" class="btn primary full">Update Password</button>
+                </form>
+                <p class="auth-note">Remember your password? <a href="#" data-target="loginPage" class="link">← Back to Login</a></p>
+            </div>
+        </section>
+
+        <!-- Student Dashboard -->
+        <section id="studentPage" class="page">
+            <h2>Student Dashboard</h2>
+            <div class="student-grid">
+                <div class="card">
+                    <h3>📝 New Appointment Request</h3>
+                    <form id="bookingForm">
+                        <div class="form-group">
+                            <label>Purpose of Appointment</label>
+                            <select id="apptPurpose" required>
+                                <option value="">-- Select Purpose --</option>
+                                <option value="Evaluation / Enrollment">Evaluation / Enrollment</option>
+                                <option value="Request of Documents">Request of Documents</option>
+                                <option value="Counseling / Consultation">Counseling / Consultation</option>
+                                <option value="Payment / Clearance">Payment / Clearance</option>
+                                <option value="Interview / Admission">Interview / Admission</option>
+                                <option value="Other">Other Concern</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Preferred Date</label>
+                            <input type="date" id="apptDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Preferred Time</label>
+                            <select id="apptTime" required>
+                                <option value="">-- Select Time Slot --</option>
+                                <option value="08:00 AM - 09:00 AM">08:00 AM – 09:00 AM</option>
+                                <option value="09:00 AM - 10:00 AM">09:00 AM – 10:00 AM</option>
+                                <option value="10:00 AM - 11:00 AM">10:00 AM – 11:00 AM</option>
+                                <option value="11:00 AM - 12:00 PM">11:00 AM – 12:00 PM</option>
+                                <option value="01:00 PM - 02:00 PM">01:00 PM – 02:00 PM</option>
+                                <option value="02:00 PM - 03:00 PM">02:00 PM – 03:00 PM</option>
+                                <option value="03:00 PM - 04:00 PM">03:00 PM – 04:00 PM</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Additional Details / Purpose</label>
+                            <textarea id="apptNotes" rows="3" placeholder="Specify documents needed, concern, or other details..."></textarea>
+                        </div>
+                        <button type="submit" class="btn primary full">Submit Appointment Request</button>
+                    </form>
+                </div>
+
+                <div class="card">
+                    <h3>📋 My Appointment Requests</h3>
+                    <div id="studentAppts"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Admin Dashboard -->
+        <section id="adminPage" class="page">
+            <h2>Administrator — Schedule Management</h2>
+            
+            <div class="card search-card">
+                <h3>🔍 Search Appointments</h3>
+                <div class="search-row">
+                    <input type="text" id="adminSearch" placeholder="Type Student ID or Name to search..." oninput="renderAdminAppts()">
+                    <button class="btn secondary" onclick="clearSearch()">Clear</button>
+                </div>
+                <p id="searchInfo" class="search-hint">Search across all sections below</p>
+            </div>
+
+            <div class="admin-grid">
+                <div class="card full-width">
+                    <h3>📥 Pending Requests <span id="pendingCount" class="badge">0</span></h3>
+                    <div id="pendingAppts"></div>
+                </div>
+                <div class="card full-width">
+                    <h3>✅ Approved — Waiting <span id="approvedCount" class="badge">0</span></h3>
+                    <div id="approvedAppts"></div>
+                </div>
+                <div class="card full-width">
+                    <h3>✅✅ Completed Transactions <span id="completedCount" class="badge">0</span></h3>
+                    <div id="completedAppts"></div>
+                </div>
+                <div class="card full-width">
+                    <h3>❌ Rejected / Cancelled <span id="rejectedCount" class="badge">0</span></h3>
+                    <div id="rejectedAppts"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="notifContainer" class="notif-container"></div>
+
+    <footer>
+        <p><strong>Dr. Francisco L. Calingasan Memorial College Foundation Inc. (DFLCMFCI)</strong></p>
+        <p>Online Appointment Scheduling System © 2026 | All Rights Reserved</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
